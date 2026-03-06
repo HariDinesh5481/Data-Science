@@ -1,0 +1,320 @@
+cells:
+  - kind: 2
+    value: "-- 1. Create CUSTOMERS Table\r
+
+      CREATE TABLE CUSTOMERS (\r
+
+      \    CUSTOMER_ID NUMBER PRIMARY KEY,\r
+
+      \    FIRST_NAME VARCHAR2(50),\r
+
+      \    LAST_NAME VARCHAR2(50),\r
+
+      \    CITY VARCHAR2(50),\r
+
+      \    PHONE_NUMBER VARCHAR2(20),\r
+
+      \    LOYALTY_POINTS NUMBER\r
+
+      );\r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- 2. Create ORDERS Table\r
+
+      CREATE TABLE ORDERS (\r
+
+      \    ORDER_ID NUMBER PRIMARY KEY,\r
+
+      \    CUSTOMER_ID NUMBER,\r
+
+      \    ORDER_DATE DATE,\r
+
+      \    TOTAL_AMOUNT NUMBER(10, 2),\r
+
+      \    DISCOUNT_AMT NUMBER(10, 2), -- Can be NULL if no discount\r
+
+      \    SHIPPING_DATE DATE          -- Can be NULL if not shipped yet\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO CUSTOMERS VALUES (101, 'John', 'Doe', 'New York',
+      '555-0100', 500);\r
+
+      INSERT INTO CUSTOMERS VALUES (102, 'Jane', 'Smith', NULL, '555-0101',
+      120);\r
+
+      INSERT INTO CUSTOMERS VALUES (103, 'Robert', 'Brown', 'Chicago', NULL,
+      0);\r
+
+      INSERT INTO CUSTOMERS VALUES (104, 'Emily', 'Davis', NULL, NULL, NULL); --
+      Lots of NULLs\r
+
+      INSERT INTO CUSTOMERS VALUES (105, 'Michael', 'Wilson', 'Miami',
+      '555-0105', NULL);"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- Orders\r
+
+      INSERT INTO ORDERS VALUES (5001, 101, DATE '2023-10-01', 150.00, 10.00,
+      DATE '2023-10-03');\r
+
+      INSERT INTO ORDERS VALUES (5002, 102, DATE '2023-10-02', 200.50, NULL,
+      DATE '2023-10-05'); -- No discount\r
+
+      INSERT INTO ORDERS VALUES (5003, 101, DATE '2023-10-05', 75.00, 5.00,
+      NULL); -- Not shipped\r
+
+      INSERT INTO ORDERS VALUES (5004, 104, DATE '2023-10-06', 300.00, NULL,
+      NULL); -- No discount, Not shipped\r
+
+      INSERT INTO ORDERS VALUES (5005, 105, DATE '2023-10-07', 50.00, 0.00, DATE
+      '2023-10-08');\r
+
+      INSERT INTO ORDERS VALUES (5006, NULL, DATE '2023-10-08', 20.00, NULL,
+      DATE '2023-10-09'); -- Orphan order"
+    languageId: oracle-sql
+  - kind: 2
+    value: COMMIT;
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: "--List the FIRST_NAME of the customer and the TOTAL_AMOUNT for all
+      orders that have a Discount (DISCOUNT_AMT is not null).\r
+
+      SELECT c.first_name,o.total_amount,o.DISCOUNT_AMT from CUSTOMERS c\r
+
+      \  left join ORDERS o \r
+
+      on c.CUSTOMER_ID = o.CUSTOMER_ID \r
+
+      where o.DISCOUNT_AMT is not null ;\r
+
+      \ "
+    languageId: oracle-sql
+  - kind: 2
+    value: "--List all Customers. If they have an order, display the ORDER_DATE. If
+      not, ensure the row still appears with a NULL date.\r
+
+      SELECT c.customer_id,o.order_date from CUSTOMERS c \r
+
+      left join orders o on \r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID;\r
+
+      \ "
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Display ORDER_ID and FIRST_NAME. We want to see all orders, including
+      the one with CUSTOMER_ID NULL (Order 5006).\r
+
+      SELECT o.order_id,c.first_name from orders o\r
+
+      left join CUSTOMERS c on\r
+
+      o.CUSTOMER_ID = c.CUSTOMER_ID;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Find the count of rows returned when you Full Outer Join Customers and
+      Orders. (Try to predict the number before running it).\r
+
+      SELECT COUNT(c.customer_id) as total_count from CUSTOMERS c \r
+
+      full OUTER join orders o ON\r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Find the CUSTOMER_IDs that exist in the CUSTOMERS table but do NOT
+      exist in the ORDERS table.     \r
+
+      SELECT c.customer_id from CUSTOMERS C \r
+
+      left join ORDERS o on\r
+
+      C.CUSTOMER_ID = o.CUSTOMER_ID\r
+
+      where o.CUSTOMER_ID is null ; \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- Find pairs of Orders (O1, O2) that were placed on the exact same
+      ORDER_DATE.\r
+
+      SELECT o.order_id,o.order_date from ORDERS\r
+
+      CROSS join CUSTOMERS;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT DISTINCT CITY\r
+
+      \    FROM CUSTOMERS;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Create a list showing every Customer paired with every unique CITY
+      found in the Customer table.\r
+
+      SELECT c.CUSTOMER_ID, d.CITY\r
+
+      FROM CUSTOMERS c\r
+
+      CROSS JOIN (\r
+
+      \    SELECT DISTINCT CITY\r
+
+      \    FROM CUSTOMERS\r
+
+      ) d;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Calculate the total DISCOUNT_AMT given to customers living in 'New
+      York'.\r
+
+      SELECT c.city,sum(o.discount_amt) as total_dis_amt from ORDERS o\r
+
+      join CUSTOMERS c ON\r
+
+      o.CUSTOMER_ID = c.CUSTOMER_ID \r
+
+      where c.city = 'New York'\r
+
+      group by c.CITY ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- Select FIRST_NAME and the SHIPPING_DATE. If the shipping date is NULL
+      (either because the order isn't shipped OR the customer has no order),
+      display 'Not Shipped'.\r
+
+      SELECT c.first_name,NVL(to_char(shipping_date,'YYYY-MM-DD'),'Not Shipped')
+      from CUSTOMERS c\r
+
+      join orders o on \r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Find the sum of TOTAL_AMOUNT for orders that do not have a linked
+      Customer (Orphan orders).\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- Join Customers to Orders, but ONLY link orders where the TOTAL_AMOUNT
+      is greater than 100. Customers with small orders should look like they
+      have NULL orders.\r
+
+      SELECT o.total_amount,c.customer_id from CUSTOMERS c \r
+
+      left join orders o on \r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID\r
+
+      and o.TOTAL_Amount > 100 ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "-- List FIRST_NAME and ORDER_ID for customers who have a Phone Number
+      (IS NOT NULL).\r
+
+      SELECT c.first_name,o.order_id from CUSTOMERS c\r
+
+      left join orders o on \r
+
+      c.customer_id = o.customer_id \r
+
+      where C.PHONE_NUMBER is not null ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Display a list of IDs. If it's a Customer without an order, show
+      Customer ID. If it's an Order without a Customer, show Order ID. Use
+      COALESCE.\r
+
+      SELECT coalesce( c.customer_id,o.ORDER_ID)  from CUSTOMERS c\r
+
+      full join ORDERS o ON\r
+
+      c.customer_id = o.customer_id;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Find customers who have the same LOYALTY_POINTS value as another
+      customer.\r
+
+      SELECT a.customer_id as customer_id,b.first_name as custCUSTOMERname  from
+      customers C \r
+
+      join  "
+    languageId: oracle-sql
+  - kind: 2
+    value: select * from customers;
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Display FIRST_NAME, CITY, and ORDER_DATE for orders that have actually
+      been shipped (SHIPPING_DATE is not null).\r
+
+      SELECT c.first_name,c.city,o.order_date from customers c\r
+
+      join ORDERS o on \r
+
+      c.customer_id = o.customer_id \r
+
+      where to_char(o.shipping_date,'YYYY-MM-DD') is not null;\r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Calculate the Average TOTAL_AMOUNT per Customer. Ensure customers with
+      no orders show up (likely as NULL or 0 depending on how you write the
+      Average).\r
+
+      SELECT nvl(AVG(o.total_amount),0)as avg_amount,c.customer_id from orders o
+      \r
+
+      right join CUSTOMERS c on \r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID\r
+
+      group by c.CUSTOMER_ID;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "--Find Customers who placed an order on the same day their account was
+      created? (Wait, we don't have account creation date. Instead: Find Orders
+      placed after the shipping date? This checks for data errors).\r
+
+      SELECT c.customer_id,o.order_date from CUSTOMERS c \r
+
+      join orders o ON\r
+
+      c.CUSTOMER_ID = o.CUSTOMER_ID\r
+
+      where o.order_date > o.shipping_date;\r
+
+      \r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT count(c.customer_id) from CUSTOMERS c\r
+
+      cross join orders o ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT * from "
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
