@@ -1,24 +1,76 @@
--- SELECT * FROM dual;
--- SELECT username FROM all_users;
+cells:
+  - kind: 2
+    value: "CREATE TABLE products1 (\r
 
--- SELECT * from dual;
+      \    product_id INT,\r
 
+      \    product_name VARCHAR(50),\r
 
+      \    category VARCHAR(50),\r
 
+      \    price INT\r
 
-CREATE TABLE employees_new (
-    id NUMBER PRIMARY KEY,
-    name VARCHAR2(10),
-    city VARCHAR2(10),
-    salary number(10,2) check (salary > 0)
-);
-INSERT INTO employees_new VALUES (1, 'Charan', 'Bangalore', 1000);
-INSERT INTO employees_new VALUES (2, 'Ravi', 'Hyderabad', 4000);
-INSERT INTO employees_new VALUES (3, 'Anil', 'Chennai', 12453);
-INSERT INTO employees_new VALUES (4, 'Neha', 'Mumbai', 234567);
-INSERT INTO employees_new VALUES (5, 'John', 'Delhi', 3245647);
+      );\r
 
-select * from eployees_new;
+      \r
 
+      INSERT INTO products1 VALUES\r
 
+      (1, 'Laptop', 'Electronics', 70000),\r
 
+      (2, 'Mouse', 'Electronics', 500),\r
+
+      (2, 'Keyboard', 'Electronics', 1500),\r
+
+      (1, 'Office Chair', 'Furniture', 8000),\r
+
+      (5, 'Desk', 'Furniture', 12000);\r
+
+      \r
+
+      \r
+
+      CREATE TABLE inventory1 (\r
+
+      \    inventory_id INT PRIMARY KEY,\r
+
+      \    product_id INT,\r
+
+      \    warehouse VARCHAR(50),\r
+
+      \    stock_quantity INT\r
+
+      );\r
+
+      \r
+
+      INSERT INTO inventory1 VALUES\r
+
+      (101, 1, 'Warehouse_A', 50),\r
+
+      (102, 1, 'Warehouse_B', 30),\r
+
+      (103, 2, 'Warehouse_A', 200),\r
+
+      (104, 2, 'Warehouse_A', 150),\r
+
+      (105, 2, 'Warehouse_B', 40);\r
+
+      \r
+
+      \r
+
+      SELECT \r
+
+      p.product_name,\r
+
+      i.warehouse,\r
+
+      i.stock_quantity\r
+
+      FROM products1 p\r
+
+      INNER JOIN inventory1 i\r
+
+      ON p.product_id = i.product_id;"
+    languageId: oracle-sql

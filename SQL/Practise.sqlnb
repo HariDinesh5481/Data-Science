@@ -307,6 +307,132 @@ cells:
     value: select * from products;
     languageId: oracle-sql
   - kind: 2
+    value: "-- 16. Find products and their price along with stock quantity.\r
+
+      SELECT p.product_name, p.price, i.stock_quantity\r
+
+      FROM products p\r
+
+      left JOIN inventory i\r
+
+      ON p.product_id = i.product_id;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "create table orders (\r
+
+      \    order_id INT PRIMARY KEY,\r
+
+      \    customer_name varchar(50),\r
+
+      \    product_name VARCHAR(50),\r
+
+      \    price DECIMAL(10,2),\r
+
+      \    quantity INT\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: drop table orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO Orders VALUES (1, 'Rahul', 'Laptop', 60000, 1);\r
+
+      INSERT INTO Orders VALUES (2, 'Sneha', 'Mobile', 25000, 2);\r
+
+      INSERT INTO Orders VALUES (3, 'Arjun', 'Headphones', 2000, 3);\r
+
+      INSERT INTO Orders VALUES (4, 'Meera', 'Smart Watch', 5000, 1);\r
+
+      INSERT INTO Orders VALUES (5, 'Vikram', 'Keyboard', 1500, 2);"
+    languageId: oracle-sql
+  - kind: 2
+    value: ALTER table orders ADD age INT ;
+    languageId: oracle-sql
+  - kind: 2
+    value: alter TABLE orders ADD gender VARCHAR2(50);
+    languageId: oracle-sql
+  - kind: 2
+    value: alter table orders add email VARCHAR(50);
+    languageId: oracle-sql
+  - kind: 2
+    value: alter table orders DROP column email;
+    languageId: oracle-sql
+  - kind: 2
+    value: "alter table orders \r
+
+      modify customer_name VARCHAR2(100);"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: TRUNCATE table orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: drop table orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE Orders (\r
+
+      \    order_id INT PRIMARY KEY,\r
+
+      \    customer_name VARCHAR(50),\r
+
+      \    product_name VARCHAR(50),\r
+
+      \    price DECIMAL(10,2),\r
+
+      \    quantity INT\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO Orders VALUES (1, 'Rahul', 'Laptop', 60000, 1);\r
+
+      INSERT INTO Orders VALUES (2, 'Sneha', 'Mobile', 25000, 2);\r
+
+      INSERT INTO Orders VALUES (3, 'Arjun', 'Headphones', 2000, 3);\r
+
+      INSERT INTO Orders VALUES (4, 'Meera', 'Smart Watch', 5000, 1);\r
+
+      INSERT INTO Orders VALUES (5, 'Vikram', 'Keyboard', 1500, 2);"
+    languageId: oracle-sql
+  - kind: 2
+    value: desc orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * FROM orders;
+    languageId: oracle-sql
+  - kind: 2
+    value: "UPDATE orders set PRICE = 48000\r
+
+      WHERE order_id = 1;"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from ORDERS;
+    languageId: oracle-sql
+  - kind: 2
+    value: "UPDATE orders \r
+
+      set quantity = 5\r
+
+      WHERE PRODUCT_NAME = 'Mouse' ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "UPDATE Orders\r
+
+      SET price = 21000, quantity = 1\r
+
+      WHERE order_id = 2;"
+    languageId: oracle-sql
+  - kind: 2
+    value: drop table orders;
+    languageId: oracle-sql
+  - kind: 2
     value: ""
     languageId: oracle-sql
   - kind: 2
