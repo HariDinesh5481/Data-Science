@@ -1,76 +1,39 @@
-cells:
-  - kind: 2
-    value: "CREATE TABLE products1 (\r
+CREATE TABLE products1 (
+    product_id INT,
+    product_name VARCHAR(50),
+    category VARCHAR(50),
+    price INT
+);
 
-      \    product_id INT,\r
+INSERT INTO products1 VALUES
+(1, 'Laptop', 'Electronics', 70000),
+(2, 'Mouse', 'Electronics', 500),
+(2, 'Keyboard', 'Electronics', 1500),
+(1, 'Office Chair', 'Furniture', 8000),
+(5, 'Desk', 'Furniture', 12000);
 
-      \    product_name VARCHAR(50),\r
 
-      \    category VARCHAR(50),\r
+CREATE TABLE inventory1 (
+    inventory_id INT PRIMARY KEY,
+    product_id INT,
+    warehouse VARCHAR(50),
+    stock_quantity INT
+);
 
-      \    price INT\r
+INSERT INTO inventory1 VALUES
+(101, 1, 'Warehouse_A', 50),
+(102, 1, 'Warehouse_B', 30),
+(103, 2, 'Warehouse_A', 200),
+(104, 2, 'Warehouse_A', 150),
+(105, 2, 'Warehouse_B', 40);
 
-      );\r
 
-      \r
+SELECT 
+p.product_name,
+i.warehouse,
+i.stock_quantity
+FROM products1 p
+INNER JOIN inventory1 i
+ON p.product_id = i.product_id;
 
-      INSERT INTO products1 VALUES\r
 
-      (1, 'Laptop', 'Electronics', 70000),\r
-
-      (2, 'Mouse', 'Electronics', 500),\r
-
-      (2, 'Keyboard', 'Electronics', 1500),\r
-
-      (1, 'Office Chair', 'Furniture', 8000),\r
-
-      (5, 'Desk', 'Furniture', 12000);\r
-
-      \r
-
-      \r
-
-      CREATE TABLE inventory1 (\r
-
-      \    inventory_id INT PRIMARY KEY,\r
-
-      \    product_id INT,\r
-
-      \    warehouse VARCHAR(50),\r
-
-      \    stock_quantity INT\r
-
-      );\r
-
-      \r
-
-      INSERT INTO inventory1 VALUES\r
-
-      (101, 1, 'Warehouse_A', 50),\r
-
-      (102, 1, 'Warehouse_B', 30),\r
-
-      (103, 2, 'Warehouse_A', 200),\r
-
-      (104, 2, 'Warehouse_A', 150),\r
-
-      (105, 2, 'Warehouse_B', 40);\r
-
-      \r
-
-      \r
-
-      SELECT \r
-
-      p.product_name,\r
-
-      i.warehouse,\r
-
-      i.stock_quantity\r
-
-      FROM products1 p\r
-
-      INNER JOIN inventory1 i\r
-
-      ON p.product_id = i.product_id;"
-    languageId: oracle-sql
