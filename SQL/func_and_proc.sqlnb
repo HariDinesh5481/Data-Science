@@ -1,0 +1,260 @@
+cells:
+  - kind: 2
+    value: select * from employees;
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE OR REPLACE FUNCTION calculate_bonus(salary NUMBER)\r
+
+      RETURN NUMBER\r
+
+      IS \r
+
+      \    bonus NUMBER;\r
+
+      BEGIN \r
+
+      \    bonus := salary*0.10;\r
+
+      \    RETURN bonus;\r
+
+      END;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT salary,calculate_bonus(salary) as bouns_salary from employees;
+    languageId: oracle-sql
+  - kind: 2
+    value: "SET SERVEROUTPUT ON; -- Ensures you can see the results\r
+
+      \r
+
+      DECLARE\r
+
+      \    -- Variable declarations\r
+
+      \    v_result      employee_sales%ROWTYPE;\r
+
+      \    v_employee_id employee_sales.emp_id%TYPE;\r
+
+      BEGIN\r
+
+      \    -- Query 1: Fetching a full row\r
+
+      \    BEGIN\r
+
+      \        SELECT * INTO v_result \r
+
+      \        FROM employee_sales \r
+
+      \        WHERE emp_id = 1;\r
+
+      \        \r
+
+      \        DBMS_OUTPUT.PUT_LINE('Employee 1 Name: ' || v_result.emp_name);\r
+
+      \    EXCEPTION\r
+
+      \        WHEN NO_DATA_FOUND THEN\r
+
+      \            DBMS_OUTPUT.PUT_LINE('Error: No employee found with ID
+      1.');\r
+
+      \    END;\r
+
+      END;\r
+
+      /\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "    -- Query 2: Fetching a specific ID by name\r
+
+      \    BEGIN\r
+
+      \        SELECT emp_id INTO v_employee_id \r
+
+      \        FROM employee_sales \r
+
+      \        WHERE emp_name = 'Amit';\r
+
+      \        \r
+
+      \        DBMS_OUTPUT.PUT_LINE('ID for Amit is: ' || v_employee_id);\r
+
+      \    EXCEPTION\r
+
+      \        WHEN NO_DATA_FOUND THEN\r
+
+      \            DBMS_OUTPUT.PUT_LINE('Error: No employee named Amit
+      found.');\r
+
+      \        WHEN TOO_MANY_ROWS THEN\r
+
+      \            DBMS_OUTPUT.PUT_LINE('Error: Multiple employees named Amit
+      exist.');\r
+
+      \    END;\r
+
+      END;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: "declare\r
+
+      \    result employee_sales%ROWTYPE;\r
+
+      \    employee_id employee_sales.emp_id%Type;\r
+
+      begin\r
+
+      \    select * into result from employee_sales where emp_id=1;\r
+
+      \    select emp_id into employee_id from employee_sales where
+      emp_name='Ravi';\r
+
+      \    dbms_output.put_line(employee_id);\r
+
+      end ;\r
+
+      /\r
+
+      \r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "declare\r
+
+      \    result varchar(100);\r
+
+      begin\r
+
+      \    select emp_name || ' ' || department  into result from
+      employee_sales  where emp_id=2;\r
+
+      \    dbms_output.put_line(result);\r
+
+      end ;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: "declare\r
+
+      \    emp_count number;\r
+
+      begin\r
+
+      \    select count(*) into emp_count from EMPLOYEES;\r
+
+      \    dbms_output.put_line('emp count in employee_sales tables is '
+      ||emp_count);\r
+
+      end ;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from EMPLOYEE_SALES;
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE employee_sales (\r
+
+      \    emp_id NUMBER,\r
+
+      \    emp_name VARCHAR2(50),\r
+
+      \    department VARCHAR2(50),\r
+
+      \    sale_amount NUMBER,\r
+
+      \    sale_date DATE\r
+
+      );\r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO employee_sales VALUES (9, 'Ravi',  'ece', 700, DATE
+      '2026-01-10');\r
+
+      \r
+
+      COMMIT;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "DECLARE\r
+
+      \    employee_id employee_sales.emp_id%TYPE;\r
+
+      BEGIN\r
+
+      \    SELECT MAX(emp_id)\r
+
+      \    INTO employee_id\r
+
+      \    FROM employee_sales\r
+
+      \    WHERE emp_name = 'Ravi';\r
+
+      \r
+
+      \    IF employee_id IS NULL THEN\r
+
+      \        DBMS_OUTPUT.PUT_LINE('Employee not found');\r
+
+      \    ELSE\r
+
+      \        DBMS_OUTPUT.PUT_LINE(employee_id);\r
+
+      \    END IF;\r
+
+      END;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: "DECLARE\r
+
+      BEGIN\r
+
+      \    FOR rec IN (\r
+
+      \        SELECT emp_id \r
+
+      \        FROM employee_sales \r
+
+      \        WHERE emp_name = 'Ravi'\r
+
+      \    )\r
+
+      \    LOOP\r
+
+      \        DBMS_OUTPUT.PUT_LINE(rec.emp_id);\r
+
+      \    END LOOP;\r
+
+      END;\r
+
+      /"
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
