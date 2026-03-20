@@ -238,7 +238,29 @@ cells:
       /"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "DECLARE\r
+
+      BEGIN\r
+
+      \    FOR rec IN (\r
+
+      \        SELECT emp_id \r
+
+      \        FROM employee_sales \r
+
+      \        WHERE emp_name = 'Ravi'\r
+
+      \    )\r
+
+      \    LOOP\r
+
+      \        DBMS_OUTPUT.PUT_LINE(rec.emp_id);\r
+
+      \    END LOOP;\r
+
+      END;\r
+
+      /"
     languageId: oracle-sql
   - kind: 2
     value: ""
