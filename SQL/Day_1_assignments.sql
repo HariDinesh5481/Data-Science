@@ -44,7 +44,7 @@ from employees;
 --M20. Show department_id, department_name from hr.departments, and a calculated column dept_code as the first 3 characters of department_name (use SUBSTR).
 SELECT department_id, department_name,substr(department_name,1,3) as dept_code from DEPARTMENTS;
 --------------------------------------------HARD-----------------------------------------------------------
---
+-- 
 
 
 

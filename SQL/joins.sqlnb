@@ -298,7 +298,7 @@ cells:
       cross join orders o ;"
     languageId: oracle-sql
   - kind: 2
-    value: "SELECT * from "
+    value: ""
     languageId: oracle-sql
   - kind: 2
     value: ""
