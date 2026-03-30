@@ -433,7 +433,7 @@ cells:
     value: drop table orders;
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: select * from employees;
     languageId: oracle-sql
   - kind: 2
     value: ""
