@@ -436,6 +436,113 @@ cells:
     value: select * from employees;
     languageId: oracle-sql
   - kind: 2
+    value: "CREATE TABLE departmentsr (\r
+
+      \    dept_id NUMBER PRIMARY KEY,\r
+
+      \    dept_name VARCHAR2(50)\r
+
+      );\r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "CREATE TABLE employeesr (\r
+
+      \    emp_id NUMBER PRIMARY KEY,\r
+
+      \    emp_name VARCHAR2(50),\r
+
+      \    salary NUMBER,\r
+
+      \    dept_id NUMBER,\r
+
+      \    manager_id NUMBER,\r
+
+      \    hire_date DATE,\r
+
+      \    FOREIGN KEY (dept_id) REFERENCES departmentsr(dept_id)\r
+
+      );"
+    languageId: oracle-sql
+  - kind: 2
+    value: "INSERT INTO departmentsr VALUES (1, 'HR');\r
+
+      INSERT INTO departmentsr VALUES (2, 'IT');\r
+
+      INSERT INTO departmentsr VALUES (3, 'Sales');\r
+
+      \r
+
+      INSERT INTO employeesr VALUES (101, 'A', 50000, 1, NULL, DATE
+      '2020-01-10');\r
+
+      INSERT INTO employeesr VALUES (102, 'B', 60000, 2, 101, DATE
+      '2021-03-15');\r
+
+      INSERT INTO employeesr VALUES (103, 'C', 70000, 2, 101, DATE
+      '2022-07-20');\r
+
+      INSERT INTO employeesr VALUES (104, 'D', 55000, 3, 102, DATE
+      '2023-02-10');\r
+
+      INSERT INTO employeesr VALUES (105, 'E', 65000, 3, 102, DATE
+      '2021-11-05');"
+    languageId: oracle-sql
+  - kind: 2
+    value: "select * from employeesr\r
+
+      where SALARY>60000;"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT * FROM EMPLOYEESR \r
+
+      where HIRE_DATE > DATE'2021-12-31';"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT * from EMPLOYEESR e\r
+
+      left JOIN DEPARTMENTSR d ON\r
+
+      e.DEPT_ID = d.DEPT_ID\r
+
+      where d.DEPT_ID ='2';"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT count(DISTINCT d.DEPT_ID) from DEPARTMENTSR d\r
+
+      left JOIN EMPLOYEESR e ON\r
+
+      e.DEPT_ID = d.DEPT_ID ;"
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
     value: ""
     languageId: oracle-sql
   - kind: 2
