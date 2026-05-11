@@ -1,0 +1,109 @@
+cells:
+  - kind: 2
+    value: SELECT * FROM EMPLOYEES
+    languageId: oracle-sql
+  - kind: 2
+    value: "select FIRST_NAME || ' ' || LAST_NAME, SALARY FROM EMPLOYEES \r
+
+      WHERE SALARY >(SELECT AVG(SALARY) FROM EMPLOYEES) "
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT FIRST_NAME || ' ' || LAST_NAME AS NAME,DEPARTMENT_ID FROM
+      EMPLOYEES \r
+
+      WHERE MANAGER_ID IS NULL"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT FIRST_NAME || ' ' || LAST_NAME AS NAME, SALARY FROM EMPLOYEES\r
+
+      WHERE (FIRST_NAME || ' ' || LAST_NAME) LIKE '%A' AND SALARY >30000"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT AVG(SALARY),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID \r
+
+      HAVING AVG(SALARY) >6000"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT COUNT(DEPARTMENT_ID),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r
+
+      HAVING COUNT(DEPARTMENT_ID) > 1"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT MAX(SALARY),DEPARTMENT_ID,MIN(SALARY) FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r
+
+      HAVING MAX(SALARY) > 2 * MIN(SALARY)"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT DEPARTMENT_ID,SUM(SALARY) FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r
+
+      HAVING SUM(SALARY) > 20000"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT department_id,AVG(SALARY) from EMPLOYEES\r
+
+      group BY DEPARTMENT_ID\r
+
+      having avg(SALARY) > (SELECT avg(SALARY) from EMPLOYEES)"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * FROM DEPARTMENTS
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT e.FIRST_NAME  || ' ' || e.LAST_NAME AS NAME,d.DEPARTMENT_NAME
+      FROM EMPLOYEES e\r
+
+      LEFT join DEPARTMENTS d ON\r
+
+      e.DEPARTMENT_ID = d.DEPARTMENT_ID\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * from EMPLOYEES1
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT count(e.employee_id),d.department_id,d.location from EMPLOYEES1
+      e\r
+
+      left join DEPARTMENTS1 d ON\r
+
+      e.DEPARTMENT_ID = d.DEPARTMENT_ID\r
+
+      group by d.DEPARTMENT_ID,d.location\r
+
+      having location = 'Hyderabad'\r
+
+      \r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "select employee_id,salary from EMPLOYEES1\r
+
+      where SALARY > (SELECT avg(SALARY) from EMPLOYEES1)"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT * FROM DEPARTMENTS1
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT COUNT(e.employee_id) as no_of_emp ,d.department_id from
+      EMPLOYEES1 e\r
+
+      LEFT join DEPARTMENTS1 d on \r
+
+      e.DEPARTMENT_ID = d.DEPARTMENT_ID\r
+
+      group by d.DEPARTMENT_ID\r
+
+      having COUNT(e.employee_id) =0\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
+  - kind: 2
+    value: ""
+    languageId: oracle-sql
