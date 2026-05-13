@@ -516,25 +516,80 @@ cells:
       e.DEPT_ID = d.DEPT_ID ;"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: select * from EMPLOYEES
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: SELECT FIRST_NAME || LAST_NAME AS Name ,salary from EMPLOYEES
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "SELECT EMPLOYEE_ID,SALARY FROM EMPLOYEES \r
+
+      WHERE SALARY > 20000"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "SELECT FIRST_NAME || LAST_NAME AS Name ,DEPARTMENT_ID FROM EMPLOYEES\r
+
+      WHERE DEPARTMENT_ID = 30"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "SELECT SALARY FROM EMPLOYEES \r
+
+      ORDER BY SALARY DESC"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "SELECT FIRST_NAME || LAST_NAME AS Name,HIRE_DATE FROM EMPLOYEES\r
+
+      WHERE HIRE_DATE BETWEEN DATE '2003-01-01' AND DATE '2005-12-31';"
     languageId: oracle-sql
   - kind: 2
-    value: ""
+    value: "SELECT COUNT(*) FROM EMPLOYEES\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT  * from EMPLOYEES
+    languageId: oracle-sql
+  - kind: 2
+    value: SELECT DISTINCT DEPARTMENT_ID FROM EMPLOYEES
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT FIRST_NAME FROM EMPLOYEES\r
+
+      WHERE FIRST_NAME LIKE 'A%'"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT EMPLOYEE_ID, FIRST_NAME, LAST_NAME, COMMISSION_PCT\r
+
+      FROM EMPLOYEES\r
+
+      WHERE COMMISSION_PCT IS NULL;\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT AVG(SALARY),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT MAX(SALARY),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r\n"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT COUNT(EMPLOYEE_ID),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID "
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT COUNT(EMPLOYEE_ID) AS TOTAL_EMP,DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r
+
+      HAVING  COUNT(EMPLOYEE_ID)>= 2"
+    languageId: oracle-sql
+  - kind: 2
+    value: "SELECT SUM(SALARY),DEPARTMENT_ID FROM EMPLOYEES\r
+
+      GROUP BY DEPARTMENT_ID\r
+
+      \r\n"
     languageId: oracle-sql
   - kind: 2
     value: ""
